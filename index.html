@@ -7,6 +7,9 @@
     <meta name="description" content="Fletcher : deliverables for project Fletcher">
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="stylesheets/yelpd3.css">
+    <script src="http://d3js.org/d3.v3.js"></script>
+    <script type="text/javascript" src="javascripts/column-charts.js"></script>
 
     <title>Fletcher</title>
   </head>
@@ -18,24 +21,58 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/Coupdesinge/Fletcher">View on GitHub</a>
 
-          <h1 id="project_title">Fletcher</h1>
-          <h2 id="project_tagline">deliverables for project Fletcher</h2>
-
-            <section id="downloads">
+          <h1 id="project_title">Making Sense of Yelp Reviews</h1>
+          <h2 id="project_tagline">Can We Give More Precise Meaning to User Star Ratings?</h2>
+          <p class="project_id">Kate Thompson//Project Fletcher//Metis//October 2014</p>
+            <!-- <section id="downloads">
               <a class="zip_download_link" href="https://github.com/Coupdesinge/Fletcher/zipball/master">Download this project as a .zip file</a>
               <a class="tar_download_link" href="https://github.com/Coupdesinge/Fletcher/tarball/master">Download this project as a tar.gz file</a>
-            </section>
+            </section> -->
         </header>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<h3>
+<!-- <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a> -->Overview</h3>
 
+<p>Yelp is a review base for</p>
+
+
+<h3>Approach</h3>
+
+<p>I used these tools</p>
+
+<h3>Initial Exploration</h3>
+
+<p>This is what I found</p>
+
+<blockquote class="yelp">
+<span class="yelp_4_sprite"></span>
+<p>While I was back in Vegas for a conference a small group of us decided to drop by and grab a meal.  It was about 8 pm and it was packed and a long line of people waiting to get in.  The hostess told us it would be 1.5 to 2 hrs....wow!  We could get seated right away if we sat outside....but it was raining off/on, so we'd have to take a chance.  I walked outside and they have umbrellas, so we took a chance and chose to get seated immediately. Luckily for us it didn't rain while we dined...ha!  I ordered: Filet Mignon Merlot - (w/Butter, Red Wine Reduction) $34.95 Macaroni Gratin - $6.95....to wash it down, we ordered a bottle of Malbec for $58. While we waited for our food, it rained a little bit.  However, with the umbrellas and patio space heaters, we were comfortable and dry.  It was actually kind of cool to sit outside on the Las Vegas Strip and watch the clouds pass overhead and rain on the city.  In the 20+ yrs I lived in Vegas, I never had an experience like that.  Having Wine during the rainfall was even better. The food came out after a while and my Filet was cooked perfectly.  I ordered it Medium-Well with just a little "pink".  The Red Wine Reduction was heavenly and smooth on the palate.  The Mac Gratin was rich and complimented the Filet very well. Overall, it was an awesome dining experience.  Don't know if I can replicate the ambiance and scenario.  The waiter was super cool and handled the weather/packed restaurant situation very well. Return Factor - 100%</p></blockquote>
+
+<blockquote class="quotes">
+<span class="yelp_5_sprite"></span>
+  <p>This is a five star sentence.</p>
+  <p>This is another five star sentence.</p>
+</blockquote>
+
+<div class="charts">
+  <div id="polaritychart1"></div>
+ <script>
+      var data1 = [["One Star",0.15], ["One Star", -0.69], ["Two Stars",0.25], ["Two Stars",-0.69], ["Three Stars",0.48], ["Three Stars",-0.53], ["Four Stars",0.67], ["Four Stars",-0.05], ["Five Stars",0.67], ["Five Stars",-0.25]];
+      
+      d3.select("#polaritychart1")
+        .datum(data1)
+          .call(columnChart()
+            .width(350)
+            .height(200)
+            .x(function(d, i) { return d[0]; })
+            .y(function(d, i) { return d[1]; }));
+  </script>
+</div>
 <pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
 $ git checkout gh-pages
@@ -69,7 +106,7 @@ $ git checkout gh-pages
     <div id="footer_wrap" class="outer">
       <footer class="inner">
         <p class="copyright">Fletcher maintained by <a href="https://github.com/Coupdesinge">Coupdesinge</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <!-- <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p> -->
       </footer>
     </div>
 

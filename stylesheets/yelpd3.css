@@ -1,0 +1,23 @@
+.chart rect {
+  stroke: white;
+  fill-opacity: .6;
+  fill: #ff0000;
+
+}
+.bar.positive {
+  fill: #ff0000;
+}
+
+.bar.negative {
+  fill: #ecd540;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

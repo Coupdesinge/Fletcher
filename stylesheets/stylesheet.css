@@ -193,6 +193,30 @@ blockquote {
   margin-bottom: 20px;
   padding: 0 0 0 20px;
   border-left: 3px solid #bbb;
+ /* background: #fff;*/
+}
+
+blockquote.quotes {
+  color: #666;
+  font-size: 22px;
+  font-style: italic;
+  margin-bottom: 20px;
+  padding: 10px 0 10px 30px;
+  border-left: 2px solid #626262;
+  background: #fff;
+}
+
+blockquote.quotes p{
+  margin: 10px 0 0 0;
+}
+
+blockquote.yelp {
+  margin-bottom: 20px;
+  padding: 30px;
+  border-left: 4px solid #c41200;
+  background: #fff;
+  color: #000;
+  border-bottom: 1px solid #626262;
 }
 
 
@@ -277,7 +301,7 @@ Full-Width Styles
   z-index: 10;
   padding: 10px 50px 10px 10px;
   color: #fff;
-  background: url('../images/blacktocat.png') #0090ff no-repeat 95% 50%;
+  background: url('../images/blacktocat.png') #c4a500 no-repeat 95% 50%;
   font-weight: 700;
   box-shadow: 0 0 10px rgba(0,0,0,.5);
   border-bottom-left-radius: 2px;
@@ -311,6 +335,13 @@ Full-Width Styles
   font-weight: 300;
   background: none;
   text-shadow: #111 0px 0px 10px;
+}
+
+.project_id {
+  color: #f2f2f2;
+  font-size: 16px;
+  font-weight: 300;
+  background: none;
 }
 
 #downloads {
@@ -366,7 +397,40 @@ Full-Width Styles
   background: #212121;
 }
 
+.yelp_4_sprite {
+  display: block;
+  background: url('../sprites/stars_map.png') no-repeat -3px -450px;
+  width: 106px;
+  height: 18px;
+}
 
+.yelp_5_sprite {
+  display: block;
+  background: url('../sprites/stars_map.png') no-repeat -3px -492px;
+  width: 106px;
+  height: 18px;
+}
+
+.yelp_3_sprite {
+  display: block;
+  background: url('../sprites/stars_map.png') no-repeat -3px -408px;
+  width: 106px;
+  height: 18px;
+}
+
+.yelp_2_sprite {
+  display: block;
+  background: url('../sprites/stars_map.png') no-repeat -3px -366px;
+  width: 106px;
+  height: 18px;
+}
+
+.yelp_1_sprite {
+  display: block;
+  background: url('../sprites/stars_map.png') no-repeat -3px -324px;
+  width: 106px;
+  height: 18px;
+}
 
 /*******************************************************************************
 Small Device Styles
