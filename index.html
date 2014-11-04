@@ -35,34 +35,58 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
 
-<h3>
-<!-- <a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a> -->Overview</h3>
+<h3>Overview</h3>
 
-<p>Yelp is a review base for</p>
-
+<p>Yelp star ratings have been shown to have an effect on business. For independent restaurants,
+for example, a one-star increase in the Yelp rating leads to a 9% increase in revenue [cite]. A business'
+star rating is the average of the ratings of reviews chosen for display by Yelp.</p>
+<p>A Yelp reader can peruse the individual reviews, and might choose to read an array of reviews attached to both low and high ratings in order to construct a picture of an establishment's offerings and characteristics
+through personal testimony. But why should the reader take reviewer's words for it? Confronted with an especially strident or detailed review, the reader is missing information about the reviewer. What sort of 
+person is he/she? Would the reader agree with him/her on what sorts of things deserve five stars? Does the reader have the same sorts of feelings about the importance of attractive staff or the proper way to make a martini?</p>
+<p>It may be possible to get the reader this kind of information by looking at patterns in the totality of the reviewer's reviews.</p>
 
 <h3>Approach</h3>
 
-<p>I used these tools</p>
+<p>Using the Yelp Academic Data Set [cite], I found reviewers with the greatest numbers of reviews, and found
+where these converged on one restaurant.</p>
+
+<p>I partitioned their reviews into 5 star ratings, and used KMeans to cluster on each of them. For each cluster, I found the three words with the highest TF-IDF scores, and then pulled all the sentences containing 
+these words.</p>
+
+<p>For each sentence, I calculated the subjectivity and polarity score with the TextBlob sentiment analyzer [cite].</p>
 
 <h3>Initial Exploration</h3>
 
-<p>This is what I found</p>
+<p>One four star review from a reviewer:</p>
 
 <blockquote class="yelp">
 <span class="yelp_4_sprite"></span>
 <p>While I was back in Vegas for a conference a small group of us decided to drop by and grab a meal.  It was about 8 pm and it was packed and a long line of people waiting to get in.  The hostess told us it would be 1.5 to 2 hrs....wow!  We could get seated right away if we sat outside....but it was raining off/on, so we'd have to take a chance.  I walked outside and they have umbrellas, so we took a chance and chose to get seated immediately. Luckily for us it didn't rain while we dined...ha!  I ordered: Filet Mignon Merlot - (w/Butter, Red Wine Reduction) $34.95 Macaroni Gratin - $6.95....to wash it down, we ordered a bottle of Malbec for $58. While we waited for our food, it rained a little bit.  However, with the umbrellas and patio space heaters, we were comfortable and dry.  It was actually kind of cool to sit outside on the Las Vegas Strip and watch the clouds pass overhead and rain on the city.  In the 20+ yrs I lived in Vegas, I never had an experience like that.  Having Wine during the rainfall was even better. The food came out after a while and my Filet was cooked perfectly.  I ordered it Medium-Well with just a little "pink".  The Red Wine Reduction was heavenly and smooth on the palate.  The Mac Gratin was rich and complimented the Filet very well. Overall, it was an awesome dining experience.  Don't know if I can replicate the ambiance and scenario.  The waiter was super cool and handled the weather/packed restaurant situation very well. Return Factor - 100%</p></blockquote>
-
-<blockquote class="quotes">
-<span class="yelp_5_sprite"></span>
-  <p>This is a five star sentence.</p>
-  <p>This is another five star sentence.</p>
-</blockquote>
-
+<p>Reviewer's distribution of star ratings:</p>
+<pre><code>
+[['One Star', 17],
+ ['Two Stars', 115],
+ ['Three Stars', 420],
+ ['Four Stars', 664],
+ ['Five Stars', 183]]
+</code></pre>
+<br>
+<p>Average positive and negative polarities per star rating:</p>
 <div class="charts">
   <div id="polaritychart1"></div>
  <script>
-      var data1 = [["One Star",0.15], ["One Star", -0.69], ["Two Stars",0.25], ["Two Stars",-0.69], ["Three Stars",0.48], ["Three Stars",-0.53], ["Four Stars",0.67], ["Four Stars",-0.05], ["Five Stars",0.67], ["Five Stars",-0.25]];
+      // var data1 = [["One Star",0.15], ["One Star", -0.69], ["Two Stars",0.25], ["Two Stars",-0.69], ["Three Stars",0.48], ["Three Stars",-0.53], ["Four Stars",0.67], ["Four Stars",-0.05], ["Five Stars",0.67], ["Five Stars",-0.25]];
+
+      var data1 = [['One Star', 0.4732142857142857],
+ ['One Star', -0.89999999999999991],
+ ['Two Stars', 0.60000000000000009],
+ ['Two Stars', -0.55833333333333335],
+ ['Three Stars', 0.8632291666666666],
+ ['Three Stars', -0.67031249999999998],
+ ['Four Stars', 1.0],
+ ['Four Stars', -0.57291666666666663],
+ ['Five Stars', 0.94843749999999993],
+ ['Five Stars', -0.43079427083333327]]
       
       d3.select("#polaritychart1")
         .datum(data1)
@@ -73,22 +97,71 @@
             .y(function(d, i) { return d[1]; }));
   </script>
 </div>
-<pre><code>$ cd your_repo_root/repo_name
+<p>Finding highest subjectivity then filtering by polarity:</p>
+<blockquote class="quotes">
+<span class="yelp_4_sprite"></span>
+<p>Or when the carts are filthy and look like theyve been carrying trash bags for days....blech!</p>
+<p>some tips: - parking is very difficult to find.</p>
+<p>I forgot about these when i got there and ordered a carne asada burrito and a carne asada taco....my son ordered the teriyaki chicken bowl....go figure.</p>
+<p>The margarita pizza was superb!</p>
+<p>Awesome place to grab a business lunch.</p>
+<p>The chips were *bleh*, but the burrito was awesome.</p>
+</blockquote>
+<p>Finding largest polarity then filtering by subjectivity:</p>
+<blockquote class="quotes">
+<span class="yelp_4_sprite"></span>
+  <p>Awesome place to meetup for a pre-game drink though.</p>
+  <p>The food is awesome.</p>
+  <p>The food came out after a while and my filet was cooked perfectly.</p>
+  <p>The size of the sandwich was perfect.</p>
+  <p>The sandwich was awesome.</p>
+  <p>I was very happy to see them here as i need to feed my sandwich addiction from time to time.</p>
+</blockquote>
+
+<blockquote class="quotes">
+<span class="yelp_5_sprite"></span>
+  <p>Awesome place to meetup for a pre-game drink though.</p>
+</blockquote>
+  
+<blockquote class="quotes">
+<span class="yelp_3_sprite"></span>
+  <p>Awesome place to meetup for a pre-game drink though.</p>
+</blockquote>
+
+<blockquote class="quotes">
+<span class="yelp_2_sprite"></span>
+  <p>The bartenders service was horrible.</p>
+  <p>The stadium is outdated and the concessions offered here are terrible.</p>
+  <p>The parking is atrocious.</p>
+  <p>I hope the team gets their act together and produces some consistently good basketball soon.</p>
+  <p>.....she says "its on the happy hour menu, since it isnt happy hour they are $9, do you want to order one?</p>
+  <p>the pizza was good...not great.</p>
+</blockquote>
+<blockquote class="quotes">
+<span class="yelp_1_sprite"></span>
+  <p>Now, its become one of the worst places downtown.</p>
+  <p>i remember when this mall was the place to come and shop....now, its one of the worst places to come and shop.</p>
+  <p>we dont care about the comedy show, we just want to use our groupon....well eat and get out of there before the stupid comedy show starts.</p>
+  <p>the website doesnt say anything about a special event tonight.</p>
+  <p>what a sham....we drove all the way to this dump just to be notified at the door that its a special event?!</p>
+  <p>i didnt feel safe walking to/from the parking lot.</p>
+</blockquote>
+
+<h3>What Next?</h3>
+<p>So now that we have all of these sentences, what do we do with them?</p>
+<p>What is the best way to visualize the text?</p>
+
+<h3>Improvements</h3>
+<p>Is this really the best way to get at what characterizes a reviewer?</p>
+<p>Use different method of topic analysis?</p>
+<p>Use different kind of sentiment analysis -- account for food related words.</p>
+
+<!-- <pre><code>$ cd your_repo_root/repo_name
 $ git fetch origin
 $ git checkout gh-pages
 </code></pre>
 
 <p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
 
 <h3>
 <a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
@@ -99,7 +172,7 @@ $ git checkout gh-pages
 <a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
 
 <p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
+      </section> -->
     </div>
 
     <!-- FOOTER  -->
